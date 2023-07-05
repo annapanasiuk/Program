@@ -1,0 +1,42 @@
+#include <stdio.h>
+
+int main() {
+    // Оголошення змінних
+    float number1, number2, number3; // Час, необхідний для споживання торта учасниками
+    float result; // Результат
+
+    // Введення часу для першого учасника
+    printf("Enter the time it takes for 1 participant to eat cake: ");
+    scanf("%f", &number1);
+
+    // Введення часу для другого учасника
+    printf("Enter the time it takes for 2 participant to eat cake: ");
+    scanf("%f", &number2);
+
+    // Введення часу для третього учасника
+    printf("Enter the time it takes for 3 participant to eat cake: ");
+    scanf("%f", &number3);
+
+    // Перевірка на некоректні дані
+    if (number1 == 0 || number2 == 0 || number3 == 0) {
+        printf("Invalid input. Numbers cannot be zero. Please enter different numbers.\n");
+        return 0;
+    }
+
+    // Перевірка на обмеження часу
+    if (number1 > 10000 || number2 > 10000 || number3 > 10000) {
+        printf("Numbers cannot exceed 10000. Please enter different numbers.\n");
+        return 0;
+    }
+
+    // Обчислення результату - обернений час, який потрібний для того, щоб троє учасників з'їли торт
+    result = 1 / number1; // Додавання оберненого часу для першого учасника
+    result += 1 / number2; // Додавання оберненого часу для другого учасника
+    result += 1 / number3; // Додавання оберненого часу для третього учасника
+    result = 1 / result; // Обернений час, щоб отримати час, необхідний для трьох учасників
+
+    // Виведення результату
+    printf("Result: %.2f\n", result);
+
+    return 0;
+}
