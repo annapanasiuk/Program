@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+unsigned long long fact(unsigned long long n) {
+    if (n <= 1)
+        return 1;
+    return n * fact(n - 1);
+}
+
+int compare(const void* a, const void* b) {
+    return *(char*)a - *(char*)b;
+}
+
+int main() {
+    char word[15];
+    printf("Введіть слово: ");
+    scanf("%s", word);
+
+    int len = strlen(word);
+    qsort(word, len, sizeof(char), compare);
+
+    // Обчислення факторіала довжини слова
+    unsigned long long total_count = fact(len);
+
+    // Додавання нульового символу на кінець слова
+    char prev_char = '0';
+    strncat(word, &prev_char, 1);
+    int count = 1;
+
+    // Підрахунок кількості анаграм
+    for (int i = 0; i < len; i++) {
+        if (word[i] == word[i + 1])
+            count++;
+        else {
+            total_count /= fact(count);
+            count = 1;
+        }
+    }
+
+    // Виведення кількості анаграм
+    printf("Кількість можливих анаграм: %llu\n", total_count);
+
+    return 0;
+}
