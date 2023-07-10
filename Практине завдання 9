@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+static int compute_steps(int x, int y) {
+    int d, s, c;
+
+    d = y - x; // Різниця між x та y
+    s = 0; // Лічильник кроків
+    c = 0; // Додаткова змінна для обрахунків
+
+    while (1) {
+        if ((y - x) <= 0)
+            break; // Якщо різниця менша або дорівнює 0, завершити цикл
+
+        if (abs(y - x - c) <= 1) {
+            s += 1; // Якщо різниця менша або дорівнює 1, зробити один крок
+            break; // Завершити цикл
+        }
+
+        c += 1; // Збільшити додаткову змінну для обрахунків
+        x += c; // Збільшити x на додаткову змінну
+        y -= c; // Зменшити y на додаткову змінну
+        s += 2; // Зробити два кроки
+    }
+
+    return s; // Повернути кількість кроків
+}
+
+
+int main(int argc, char* argv[]) {
+    int x, y;
+
+    while (scanf("%d %d", &x, &y) != EOF)
+        printf("%d\n", compute_steps(x, y));
+
+    return EXIT_SUCCESS;
+}
